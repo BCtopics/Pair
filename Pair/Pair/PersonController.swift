@@ -41,11 +41,29 @@ class PersonController {
         while counter < people.count { // Changed this from < to <=
             
 //            var i = arc4random_uniform(UInt32(people.count)) // This is too random
-            let az = people
-            newArray.append(az[Int(counter)])
-            counter += 1
+//            let az = people
+//            newArray.append(az[Int(counter)])
             
+            let person = PersonController.shared.people[counter]
+            newArray.append(person)
+            counter += 1
         }
+        
+//        
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+//        request.predicate = NSPredicate(format:"markedCell = %@", "people")
+//        do {if let results = try CoreDataStack.context.fetch(request) as? [NSManagedObject] {
+//            
+//            // Delete _all_ objects:
+//            for object in results {
+//                CoreDataStack.context.delete(object)
+//            }
+//            
+//        } else {
+//            // ... fetch failed, report error
+//            }} catch {
+//            
+//        }
         
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
@@ -72,6 +90,7 @@ class PersonController {
         while counter < newArray.count {
             guard let full = newArray[counter].fullName else { NSLog("Person was nil"); return }
             create(fullName: full)
+            counter += 1
         }
         
 //        let newnewArray = newArray.flatMap { Person(fullName: $0.fullName!) }
