@@ -18,7 +18,7 @@ class CapstoneGroupsTableViewController: UITableViewController {
      //MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return sections()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,6 +28,9 @@ class CapstoneGroupsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath)
+        
+//        let index = Int(arc4random_uniform(UInt32(PersonController.shared.people.count)))
+//        let person = PersonController.shared.people[index]
 
         let person = PersonController.shared.people[indexPath.row]
         cell.textLabel?.text = person.fullName
@@ -35,7 +38,35 @@ class CapstoneGroupsTableViewController: UITableViewController {
         return cell
     }
     
+    func sections() -> Int {
+        var sections: Int = 1
+        
+//        if PersonController.shared.people.count <= 2 {
+//            sections = 1
+//            self.perGroup = 2
+//        } else if PersonController.shared.people.count <= 4 {
+//            sections = 2
+//        }
+        
+        if PersonController.shared.people.count / sections > 2 {
+            sections += 1
+        }
+        
+        return sections
+    }
+    
+//    func shuffle() -> Person {
+//                let index = Int(arc4random_uniform(UInt32(PersonController.shared.people.count)))
+//                let person = PersonController.shared.people[index]
+//                return person
+//    }
+    
     //MARK: - IBActions
+    
+    @IBAction func randomButtonTapped(_ sender: Any) {
+        PersonController.shared.shuffle()
+        tableView.reloadData()
+    }
     
     @IBAction func addButtonTapped(_ sender: Any) {
         
@@ -46,8 +77,7 @@ class CapstoneGroupsTableViewController: UITableViewController {
         }
         
         let firstTextField = alert.textFields![0] as UITextField
-        
-//        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+
         let okAction = UIAlertAction(title: "OK", style: .default) { (OKAction) in
             guard let fullName = firstTextField.text else { return }
             
@@ -62,22 +92,8 @@ class CapstoneGroupsTableViewController: UITableViewController {
         alert.addAction(okAction)
 
         self.present(alert, animated: true, completion: nil)
-    
-//        guard let fullName = firstTextField.text else { return }
-//        
-//        PersonController.shared.create(fullName: fullName)
-//        
-//        tableView.reloadData()
-    }
-    
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
     }
-    */
 
     /*
     // Override to support editing the table view.
@@ -91,29 +107,9 @@ class CapstoneGroupsTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    //MARK: - Internal Properties
+    
+    var perGroup = 0
 
 }

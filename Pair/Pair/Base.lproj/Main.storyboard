@@ -34,6 +34,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Capstone Groups" id="QhH-I9-c8y">
+                        <barButtonItem key="leftBarButtonItem" title="Random" id="hX5-cE-uCl">
+                            <connections>
+                                <action selector="randomButtonTapped:" destination="vMZ-7S-gnJ" id="KB4-VI-vcI"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lLm-ZU-ArL">
                             <connections>
                                 <action selector="addButtonTapped:" destination="vMZ-7S-gnJ" id="8aG-5c-h63"/>

@@ -23,3 +23,7 @@ This is a coding challenge that would be given 60-90 minutes in a technical inte
 ![List](https://github.com/DevMountain/Pair/blob/master/1.png)
 ![Randomized list](https://github.com/DevMountain/Pair/blob/master/2.png)
 ![Adding an entity](https://github.com/DevMountain/Pair/blob/master/3.png)
+
+
+let index = Int(arc4random_uniform(UInt32(PersonController.shared.people.count)))
+let person = PersonController.shared.people[index]
